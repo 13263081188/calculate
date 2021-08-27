@@ -67,7 +67,7 @@ def main():
             plt.ylabel('k/s per concentration')
             plt.title('derivative_ concentration')
             for i in range(1,6):
-                ax1.plot(x, polyder["polyder"+str(i)](x), label=str(i)+"阶多项式单位浓度k/s", linewidth=1, color=color_[i])
+                ax1.plot(x, polyder["polyder"+str(i)](x), label="Polynomial of order"+str(i)+"k/s", linewidth=1, color=color_[i])
                 # st.write(i)
             plt.legend()
             st.pyplot(fig1)
