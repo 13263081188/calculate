@@ -17,7 +17,7 @@ def main():
     title = 'simple line example',
     x_axis_label = 'x',
     y_axis_label = 'y')
-    p.line(x, y, legend_label='Trend', line_width=2)
+    p.line(x, y, legend_label='Trend', line_width=200)
     st.bokeh_chart(p, use_container_width=True)
     st.write("cooling-ing")
     # coef 为系数，poly_fit 拟合函数
