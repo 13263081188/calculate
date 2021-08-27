@@ -53,7 +53,7 @@ def main():
             poly_fit = collections.defaultdict(np.poly1d)
             for i in range(1, 6):
                 poly_fit['poly_fit'+str(i)] = np.poly1d(np.polyfit(x,y,i))
-                ax.plot(x,poly_fit['poly_fit'+str(i)](x),label = 'coef'+str(i), color = color_[i],linewidth = i)
+                ax.plot(x,poly_fit['poly_fit'+str(i)](x),label = 'coef'+str(i), color = color_[i],linewidth = 1)
             for i in range(1,6):
                 # st.write("coef"+str(i),eval("coef"+str(i)))
                 polyder["polyder"+str(i)] = np.polyder(poly_fit["poly_fit"+str(i)])
