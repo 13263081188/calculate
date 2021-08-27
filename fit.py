@@ -4,9 +4,8 @@ from bokeh.plotting import figure,show
 import matplotlib
 import matplotlib.pyplot as plt
 
-matplotlib.rcParams['axes.unicode_minus']=False
-matplotlib.rcParams['font.family'] = 'STSong'  # 修改了全局变量
 
+matplotlib.rcParams['font.family'] = 'SimHei'  # 字体设置为黑体
 plt.rcParams['axes.unicode_minus']=False
 import pandas as pd
 x = np.array([i for i in range(10000)])
@@ -63,7 +62,7 @@ def main():
             st.pyplot(fig)
             fig1, ax1 = plt.subplots()
 
-            matplotlib.rcParams['font.family'] = 'SimHei'  # 字体设置为黑体
+
             plt.xlabel('浓度')
             plt.ylabel('单位浓度k/s')
             plt.title('单位浓度k/s值随浓度变化')
