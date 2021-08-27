@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-from bokeh.plotting import figure
+from bokeh.plotting import figure,show
 import matplotlib.pyplot as plt
 import pandas as pd
 x = np.array([-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10])
@@ -11,14 +11,20 @@ def main():
     st.set_page_config(layout="wide", page_title="计算机配色")
     st.write('\n')
     st.write("结果展示")
+
     x = [1, 2, 3, 4, 5]
     y = [6, 7, 2, 4, 5]
+    st.write(x)
+    st.write(y)
     p = figure(
     title = 'simple line example',
     x_axis_label = 'x',
     y_axis_label = 'y')
-    p.line(x, y, legend_label='Trend', line_width=200)
+    # st.write(p)
+    p.line(x, y, legend_label='Trend', line_width=1)
+    st.write("ending")
     st.bokeh_chart(p, use_container_width=True)
+    # show(p)
     st.write("cooling-ing")
     # coef 为系数，poly_fit 拟合函数
     coef1 = np.polyfit(x,y, 1)
