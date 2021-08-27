@@ -63,7 +63,7 @@ def main():
             fig1, ax1 = plt.subplots()
 
 
-            plt.xlabel('浓度')
+            plt.xlabel('浓度',fontproperties='SimHei')
             plt.ylabel('单位浓度k/s')
             plt.title('单位浓度k/s值随浓度变化')
             for i in range(1,6):
