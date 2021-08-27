@@ -14,8 +14,6 @@ def main():
 
     x = [1, 2, 3, 4, 5]
     y = [6, 7, 2, 4, 5]
-    st.write(x)
-    st.write(y)
     p = figure(
     title = 'simple line example',
     x_axis_label = 'x',
