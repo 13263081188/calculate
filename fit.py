@@ -21,34 +21,32 @@ def main():
     x_axis_label = 'x',
     y_axis_label = 'y')
     # st.write(p)
-    p.line(x, y, legend_label='Trend', line_width=1)
-    st.write("ending")
-    st.bokeh_chart(p, use_container_width=True)
-    # show(p)
-    st.write("cooling-ing")
+    p.line(x, y, legend_label='Trend', line_color = 'red', line_width=1)
+
     # coef 为系数，poly_fit 拟合函数
     coef1 = np.polyfit(x,y, 1)
     poly_fit1 = np.poly1d(coef1)
-    #
-    # coef2 = np.polyfit(x,y, 2)
-    # poly_fit2 = np.poly1d(coef2)
+    p.line(x, poly_fit1(x), legend_label='coef1', line_color='blue', line_width=1)
+
+    coef2 = np.polyfit(x,y, 2)
+    poly_fit2 = np.poly1d(coef2)
+    p.line(x, poly_fit2(x), legend_label='coef2', line_color='black', line_width=1)
     # st.plot(x, poly_fit2(x), 'b',label="二阶拟合")
-    # print(poly_fit2)
-    #
-    # coef3 = np.polyfit(x,y, 3)
-    # poly_fit3 = np.poly1d(coef3)
+
+    coef3 = np.polyfit(x,y, 3)
+    poly_fit3 = np.poly1d(coef3)
+    p.line(x, poly_fit3(x), legend_label='coef3', line_color='green', line_width=1)
     # st.plot(x, poly_fit3(x), 'y',label="三阶拟合")
     # print(poly_fit3)
-    #
-    # coef4 = np.polyfit(x,y, 4)
-    # poly_fit4 = np.poly1d(coef4)
-    # st.plot(x, poly_fit4(x), 'k',label="四阶拟合")
-    # print(poly_fit4)
-    #
-    # coef5 = np.polyfit(x,y, 5)
-    # poly_fit5 = np.poly1d(coef5)
-    # st.plot(x, poly_fit5(x), 'r:',label="五阶拟合")
-    # print(poly_fit5)
+
+    coef4 = np.polyfit(x,y, 4)
+    poly_fit4 = np.poly1d(coef4)
+    p.line(x, poly_fit4(x), legend_label='coef4', line_color='orange', line_width=1)
+
+    coef5 = np.polyfit(x,y, 5)
+    poly_fit5 = np.poly1d(coef5)
+    p.line(x, poly_fit5(x), legend_label='coef5', line_color='yellow', line_width=1)
+
     #
     # st.scatter(x, y, color='black')
     # st.legend(loc=2)
@@ -56,5 +54,9 @@ def main():
     #
     #
     # st.line_chart(chart_data)
+    st.write("ending")
+    st.bokeh_chart(p, use_container_width=True)
+    show(p)
+    st.write("cooling-ing")
 if __name__ == '__main__':
     main()
