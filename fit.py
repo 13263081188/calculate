@@ -15,7 +15,7 @@ def main():
     st.sidebar.title("设置输入组数")
     number = st.sidebar.text_input("组数")
     st.write('\n')
-    st.write("结果输入")
+    st.write("输入")
     if number:
         col_form_input_x = [0 for _ in range(int(number))]
         col_form_input_y = [0 for _ in range(int(number))]
