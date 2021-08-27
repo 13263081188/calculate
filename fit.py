@@ -1,60 +1,76 @@
 import streamlit as st
 import numpy as np
 from bokeh.plotting import figure,show
+import matplotlib
 import matplotlib.pyplot as plt
+matplotlib.rcParams['axes.unicode_minus']=False
 import pandas as pd
-x = np.array([-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10])
+x = np.array([i for i in range(10000)])
 y = np.array(2*(x**4) + x**2 + 9*x + 2) #假设因变量y刚好符合该公式
 #y = np.array([300,500,0,-10,0,20,200,300,1000,800,4000,5000,10000,9000,22000])
+color_ = ['black','red','green','orange','yellow','blue']
 def main():
     # Wide mode
-    st.set_page_config(layout="wide", page_title="计算机配色")
+    st.set_page_config(layout="wide", page_title="单位浓度k/s值计算")
+    st.sidebar.title("设置输入组数")
+    number = st.sidebar.text_input("组数")
     st.write('\n')
-    st.write("结果展示")
+    st.write("结果输入")
+    if number:
+        col_form_input_x = [0 for _ in range(int(number))]
+        col_form_input_y = [0 for _ in range(int(number))]
+        col = st.columns(int(number))
+        col_form = [col[_].form(key=str(_)) for _ in range(int(number))]
+        col_form_c = [[] for _ in range(int(number))]
+        for i in range(int(number)):
+            col_form_input_x[i] = col_form[i].text_input("浓度")
+            col_form_input_y[i] = col_form[i].text_input("k/s值")
+            if col_form[i].form_submit_button("确认"):
+                # st.write(col_form_input_x)
+                pass
+        st.write("输入对应浓度和选择的拟合多项式阶数")
+        z = st.form(key="input_")
+        c_ = (z.text_input("对应浓度"))
+        poly_ = (z.text_input("选择模拟多项式的阶数"))
+        if z.form_submit_button("确认"):
+            st.write("请点击可视化分析显示结果》》》")
+        if st.button("可视化分析") and c_ and poly_:
+            x = [float(j) for j in col_form_input_x]
+            y = [float(j) for j in col_form_input_y]
 
-    x = [1, 2, 3, 4, 5]
-    y = [6, 7, 2, 4, 5]
-    p = figure(
-    title = 'simple line example',
-    x_axis_label = 'x',
-    y_axis_label = 'y')
-    # st.write(p)
-    p.line(x, y, legend_label='Trend', line_color = 'red', line_width=1)
+            fig, ax = plt.subplots()
+            matplotlib.rcParams['font.family'] = 'SimHei'  # 字体设置为黑体
+            plt.xlabel('浓度')
+            plt.ylabel('k/s值')
+            plt.title('k/s值随浓度变化')
+            #origin
+            ax.plot(x, y, label='原始数据', linewidth=1, color='black', marker='o',
+                    markerfacecolor='black', markersize=2)
+            import  collections
+            polyder = collections.defaultdict(np.poly1d)
+            poly_fit = collections.defaultdict(np.poly1d)
+            for i in range(1, 6):
+                poly_fit['poly_fit'+str(i)] = np.poly1d(np.polyfit(x,y,i))
+                ax.plot(x,poly_fit['poly_fit'+str(i)](x),label = 'coef'+str(i), color = color_[i],linewidth = i)
+            for i in range(1,6):
+                # st.write("coef"+str(i),eval("coef"+str(i)))
+                polyder["polyder"+str(i)] = np.polyder(poly_fit["poly_fit"+str(i)])
+                # st.write(np.polyder(eval("poly_fit"+str(i)))(x))
+            plt.legend()
+            st.pyplot(fig)
+            fig1, ax1 = plt.subplots()
 
-    # coef 为系数，poly_fit 拟合函数
-    coef1 = np.polyfit(x,y, 1)
-    poly_fit1 = np.poly1d(coef1)
-    p.line(x, poly_fit1(x), legend_label='coef1', line_color='blue', line_width=1)
+            matplotlib.rcParams['font.family'] = 'SimHei'  # 字体设置为黑体
+            plt.xlabel('浓度')
+            plt.ylabel('单位浓度k/s')
+            plt.title('单位浓度k/s值随浓度变化')
+            for i in range(1,6):
 
-    coef2 = np.polyfit(x,y, 2)
-    poly_fit2 = np.poly1d(coef2)
-    p.line(x, poly_fit2(x), legend_label='coef2', line_color='black', line_width=1)
-    # st.plot(x, poly_fit2(x), 'b',label="二阶拟合")
-
-    coef3 = np.polyfit(x,y, 3)
-    poly_fit3 = np.poly1d(coef3)
-    p.line(x, poly_fit3(x), legend_label='coef3', line_color='green', line_width=1)
-    # st.plot(x, poly_fit3(x), 'y',label="三阶拟合")
-    # print(poly_fit3)
-
-    coef4 = np.polyfit(x,y, 4)
-    poly_fit4 = np.poly1d(coef4)
-    p.line(x, poly_fit4(x), legend_label='coef4', line_color='orange', line_width=1)
-
-    coef5 = np.polyfit(x,y, 5)
-    poly_fit5 = np.poly1d(coef5)
-    p.line(x, poly_fit5(x), legend_label='coef5', line_color='yellow', line_width=1)
-
-    #
-    # st.scatter(x, y, color='black')
-    # st.legend(loc=2)
-    # plt.show()
-    #
-    #
-    # st.line_chart(chart_data)
-    st.write("ending")
-    st.bokeh_chart(p, use_container_width=True)
-    show(p)
-    st.write("cooling-ing")
+                ax1.plot(x, polyder["polyder"+str(i)](x), label=str(i)+"阶多项式单位浓度k/s", linewidth=1, color=color_[i])
+                # st.write(i)
+            plt.legend()
+            st.pyplot(fig1)
+            st.sidebar.write("单位浓度k/s结果：")
+            st.sidebar.write(str(polyder["polyder"+str(poly_)](float(c_))))
 if __name__ == '__main__':
     main()
