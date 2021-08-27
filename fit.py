@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 matplotlib.rcParams['axes.unicode_minus']=False
 matplotlib.rcParams['font.family'] = 'STSong'  # 修改了全局变量
-matplotlib.rcParams['font.size'] = 20
+
 plt.rcParams['axes.unicode_minus']=False
 import pandas as pd
 x = np.array([i for i in range(10000)])
