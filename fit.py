@@ -3,7 +3,10 @@ import numpy as np
 from bokeh.plotting import figure,show
 import matplotlib
 import matplotlib.pyplot as plt
+
 matplotlib.rcParams['axes.unicode_minus']=False
+matplotlib.rcParams['font.family'] = 'STSong'  # 修改了全局变量
+matplotlib.rcParams['font.size'] = 20
 import pandas as pd
 x = np.array([i for i in range(10000)])
 y = np.array(2*(x**4) + x**2 + 9*x + 2) #假设因变量y刚好符合该公式
@@ -65,7 +68,6 @@ def main():
             plt.ylabel('单位浓度k/s')
             plt.title('单位浓度k/s值随浓度变化')
             for i in range(1,6):
-
                 ax1.plot(x, polyder["polyder"+str(i)](x), label=str(i)+"阶多项式单位浓度k/s", linewidth=1, color=color_[i])
                 # st.write(i)
             plt.legend()
