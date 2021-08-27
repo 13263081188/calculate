@@ -42,11 +42,11 @@ def main():
             y = [float(j) for j in col_form_input_y]
 
             fig, ax = plt.subplots()
-            plt.xlabel('浓度')
-            plt.ylabel('k/s值')
-            plt.title('k/s值随浓度变化')
+            plt.xlabel('concentration')
+            plt.ylabel('k/s')
+            plt.title('k/s _ concentration')
             #origin
-            ax.plot(x, y, label='原始数据', linewidth=1, color='black', marker='o',
+            ax.plot(x, y, label='origin_data', linewidth=1, color='black', marker='o',
                     markerfacecolor='black', markersize=2)
             import  collections
             polyder = collections.defaultdict(np.poly1d)
@@ -63,9 +63,9 @@ def main():
             fig1, ax1 = plt.subplots()
 
 
-            plt.xlabel('浓度',fontproperties='SimHei')
-            plt.ylabel('单位浓度k/s')
-            plt.title('单位浓度k/s值随浓度变化')
+            plt.xlabel('concentration',fontproperties='SimHei')
+            plt.ylabel('k/s per concentration')
+            plt.title('derivative_ concentration')
             for i in range(1,6):
                 ax1.plot(x, polyder["polyder"+str(i)](x), label=str(i)+"阶多项式单位浓度k/s", linewidth=1, color=color_[i])
                 # st.write(i)
