@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 matplotlib.rcParams['axes.unicode_minus']=False
 matplotlib.rcParams['font.family'] = 'STSong'  # 修改了全局变量
 matplotlib.rcParams['font.size'] = 20
+matplotlib.rcParams['font.family'] = 'SimHei'  # 字体设置为黑体
 import pandas as pd
 x = np.array([i for i in range(10000)])
 y = np.array(2*(x**4) + x**2 + 9*x + 2) #假设因变量y刚好符合该公式
@@ -42,7 +43,6 @@ def main():
             y = [float(j) for j in col_form_input_y]
 
             fig, ax = plt.subplots()
-            matplotlib.rcParams['font.family'] = 'SimHei'  # 字体设置为黑体
             plt.xlabel('浓度')
             plt.ylabel('k/s值')
             plt.title('k/s值随浓度变化')
